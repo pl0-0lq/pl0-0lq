@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>추억 편지 숨은그림 페이지</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>편지 + 숨은 그림찾기 페이지</h1>
+        <p>
+          편지 파일과 사진을 넣으면, 첫 번째 사진이 숨은 그림찾기 미션이 됩니다.
+          모두 찾으면 다른 사진이 시간순으로 희미하게 바뀌고 편지가 올라옵니다.
+        </p>
+      </header>
+
+      <section class="card controls">
+        <label class="field">
+          <span>편지 파일 (.txt / .md)</span>
+          <input id="letterInput" type="file" accept=".txt,.md,text/plain" />
+        </label>
+
+        <label class="field">
+          <span>사진 파일들 (최소 2장)</span>
+          <input id="photoInput" type="file" accept="image/*" multiple />
+        </label>
+
+        <label class="field">
+          <span>숨은 그림 10개 이름 (쉼표로 구분)</span>
+          <textarea id="itemsInput" rows="3" placeholder="야구공, 냄비, 사과, 컵, 열쇠, 모자, 연필, 시계, 꽃, 우산"></textarea>
+        </label>
+
+        <div class="actions">
+          <button id="startBtn">페이지 만들기</button>
+          <button id="shareBtn" disabled>다른 사람에게 그대로 보내기</button>
+          <button id="downloadBtn" disabled>완성 페이지 파일 저장</button>
+        </div>
+        <p class="hint">
+          공유 버튼은 Web Share API를 지원하는 환경에서 파일을 바로 전송합니다. 지원되지 않으면 파일 저장 후 직접 전달하세요.
+        </p>
+      </section>
+
+      <section id="gameSection" class="card game hidden">
+        <h2>숨은 그림찾기</h2>
+        <p id="progressText">0 / 10 찾음</p>
+
+        <div class="puzzle-wrap">
+          <img id="puzzleImage" alt="숨은 그림찾기 배경" />
+          <div id="hotspotLayer"></div>
+        </div>
+
+        <div id="itemBar" class="item-bar"></div>
+      </section>
+
+      <section id="revealSection" class="card reveal hidden">
+        <h2>추억 재생 + 편지</h2>
+        <div id="slideshow" class="slideshow"></div>
+        <article id="letterView" class="letter"></article>
+      </section>
+    </main>
+
+    <template id="itemTemplate">
+      <button class="item-chip"></button>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
