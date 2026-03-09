@@ -1,9 +1,28 @@
-- 👋 Hi, I’m @pl0-0lq
-- 👀 I’m interested in mechanical engineering, energy harvesting, sensor, and structural composites.
-- 🌱 I’m currently learning machine learning.
-- 💞️ I’m looking to collaborate on smart structure.
+# Letter + Hidden Picture Memory Page
 
-<!---
-pl0-0lq/pl0-0lq is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+편지 파일과 사진을 넣으면 아래 흐름으로 동작하는 단일 웹 페이지입니다.
+
+1. 첫 번째 사진이 **숨은 그림찾기 배경**이 됩니다.
+2. 하단에 **10개의 숨은 그림 이름**이 나열됩니다.
+3. 10개를 모두 찾으면,
+   - 나머지 사진들이 **희미하게 시간순으로 전환**되고
+   - 편지 내용이 **서서히 올라오며 표시**됩니다.
+4. 완성 페이지를 **파일로 저장**하거나, 지원 브라우저에서 **Web Share API로 전송**할 수 있습니다.
+
+## 실행 방법
+
+로컬에서 `index.html`을 브라우저로 열면 됩니다.
+
+또는:
+
+```bash
+python3 -m http.server 4173
+```
+
+브라우저에서 `http://localhost:4173` 접속.
+
+## 파일 구성
+
+- `index.html`: 업로드/게임/리빌 UI 구조
+- `styles.css`: 페이지 스타일 및 애니메이션
+- `script.js`: 업로드 처리, 숨은그림 로직, 공유/저장 로직
