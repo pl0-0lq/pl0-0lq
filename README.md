@@ -1,9 +1,39 @@
-- 👋 Hi, I’m @pl0-0lq
-- 👀 I’m interested in mechanical engineering, energy harvesting, sensor, and structural composites.
-- 🌱 I’m currently learning machine learning.
-- 💞️ I’m looking to collaborate on smart structure.
+# G-code Layer Path Editor (OrcaSlicer)
 
-<!---
-pl0-0lq/pl0-0lq is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+OrcaSlicer로 만든 G-code를 업로드하면 압출 경로를 레이어별로 시각화하고,
+왼쪽 뷰에서 시작점을 선택했을 때 한붓그리기(오일러 경로) 우선으로 경로를 재구성해
+오른쪽 뷰에서 결과를 확인할 수 있는 브라우저 앱입니다.
+
+## 기능
+
+- G-code 파일 업로드 (`;LAYER:n` 기준 레이어 분리)
+- 레이어별 압출 선분(G1 + E 증가) 추출
+- 좌/우 2개 캔버스 시각화
+  - 좌측: 원본 경로 + 시작점/종료점 마커
+  - 우측: 재구성된 경로
+- 시작점 클릭 시 자동 종료점 계산
+  - 홀수 차수 정점이 있으면 그 집합 내에서 거리 기준 선택
+  - 없으면 전체 정점 중 거리 기준 선택
+- 수정된 단일 레이어 G-code 생성/다운로드
+
+## 실행 방법
+
+정적 파일이므로 간단히 로컬 서버로 실행하면 됩니다.
+
+```bash
+python3 -m http.server 8000
+```
+
+브라우저에서 `http://localhost:8000` 접속.
+
+## 구현 메모
+
+- 경로 재구성은 그래프 기반으로 수행합니다.
+- 가능한 경우 Hierholzer 알고리즘으로 오일러 트레일을 만듭니다.
+- 그래프가 분리되거나 오일러 트레일이 완성되지 않으면 근접 노드 순회(그리디)로 폴백합니다.
+
+## 제한사항
+
+- 현재는 “전체 파일 재작성”이 아닌 “선택 레이어 재구성 결과”를 별도 G-code로 출력합니다.
+- 압출량(E)은 거리 기반 간단 비율로 재계산합니다.
+- 리트랙션/속도/툴체인지 등 고급 파라미터는 보존하지 않습니다.
