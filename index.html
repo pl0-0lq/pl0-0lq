@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>G-code Layer Path Editor</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>G-code 레이어 경로 편집기</h1>
+      <p>OrcaSlicer G-code를 업로드하고 시작점을 선택해 한붓그리기 기반으로 경로를 재구성합니다.</p>
+    </header>
+
+    <section class="controls">
+      <label class="upload">
+        <span>G-code 업로드</span>
+        <input type="file" id="gcodeFile" accept=".gcode,.txt" />
+      </label>
+
+      <label>
+        레이어
+        <select id="layerSelect" disabled></select>
+      </label>
+
+      <div class="meta" id="meta">파일을 업로드하세요.</div>
+    </section>
+
+    <main class="viewer-grid">
+      <section class="panel">
+        <h2>원본 레이어 (좌)</h2>
+        <canvas id="leftCanvas" width="640" height="640"></canvas>
+        <p class="hint">좌클릭으로 시작점 선택 → 종료점 자동 선택</p>
+      </section>
+
+      <section class="panel">
+        <h2>수정 경로 (우)</h2>
+        <canvas id="rightCanvas" width="640" height="640"></canvas>
+        <p class="hint">한붓그리기(오일러 경로) 우선, 불가 시 근접 연결</p>
+      </section>
+    </main>
+
+    <section class="output">
+      <h3>수정된 G-code 미리보기</h3>
+      <textarea id="gcodeOutput" rows="14" readonly placeholder="레이어와 시작점을 선택하면 수정된 G-code가 생성됩니다."></textarea>
+      <button id="downloadBtn" disabled>수정 G-code 다운로드</button>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
